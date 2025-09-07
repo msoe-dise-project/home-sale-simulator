@@ -22,7 +22,7 @@ PASSWORD_KEY = "POSTGRES_PASSWORD"
 HOST_KEY = "POSTGRES_HOST"
 DRIFT_KEY = "ENABLE_DRIFT"
 
-DATABASE = "home_price_prediction_service"
+DATABASE = "house_price_prediction_service"
 
 DAYS_TO_SEC = 24 * 60 * 60
 
@@ -62,7 +62,7 @@ class Simulator:
             per_rec_multiplier = current_price_multiplier + random.normalvariate(sigma=0.05)
             record["price"] = record["price"] * per_rec_multiplier
 
-            record["sale_date"] = dt.date.today().isoformat()
+            record["event_date"] = dt.date.today().isoformat()
             logger.debug(pprint.pformat(record))
             logger.debug("")
             yield record
