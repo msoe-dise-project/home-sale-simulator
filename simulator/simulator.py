@@ -74,7 +74,7 @@ def store_events(conn_string, simulator):
         with conn.cursor() as cur:
             while True:
                 for record in simulator.simulate_period():
-                    cur.execute("INSERT INTO raw_home_sale_events (event_date, data) VALUES (%s);",
+                    cur.execute("INSERT INTO raw_home_sale_events (event_date, data) VALUES (%s, %s);",
                                 [record["event_date"], Jsonb(record)])
 
                     conn.commit()
