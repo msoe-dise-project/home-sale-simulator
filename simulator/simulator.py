@@ -62,7 +62,7 @@ class Simulator:
             per_rec_multiplier = current_price_multiplier + random.normalvariate(sigma=0.05)
             record["price"] = record["price"] * per_rec_multiplier
 
-            record["event_date"] = dt.date.today().isoformat()
+            record["event_timestamp"] = dt.datetime.now().isoformat()
             logger.debug(pprint.pformat(record))
             logger.debug("")
             yield record
@@ -74,8 +74,8 @@ def store_events(conn_string, simulator):
         with conn.cursor() as cur:
             while True:
                 for record in simulator.simulate_period():
-                    cur.execute("INSERT INTO raw_home_sale_events (event_date, data) VALUES (%s, %s);",
-                                [record["event_date"], Jsonb(record)])
+                    cur.execute("INSERT INTO raw_home_sale_events (event_timestamp, data) VALUES (%s, %s);",
+                                [record["event_timestamp"], Jsonb(record)])
 
                     conn.commit()
 
