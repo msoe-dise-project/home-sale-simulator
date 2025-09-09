@@ -63,6 +63,7 @@ class Simulator:
             record["price"] = record["price"] * per_rec_multiplier
 
             record["event_timestamp"] = dt.datetime.now().isoformat()
+            del record["sale_date"]
             logger.debug(pprint.pformat(record))
             logger.debug("")
             yield record
